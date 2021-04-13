@@ -43,9 +43,17 @@ int load_data(Product * p[]){
 	return i;
 }
 void search_name(Product * p[], int index, char s_name[]){
+	int check = 0;
+	printf("\nNo Weight  Price  Star  numberOfStar  Name\n");	
 	for(int i = 0; i<index ;i++){
-	
+		if(p[i]->weight==-1) continue;
+		if(strstr(p[i]->name,s_name)){
+			check = 1;
+			printf("%2d ",i+1);
+			read(*p[i]);		
+		}	
 	}	
+	if(check == 0) printf("=> 없습니다..\n");
 }
 
 int main(){
