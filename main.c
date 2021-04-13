@@ -7,7 +7,7 @@
 int select_menu(){
 	int menu;
 	printf("\n*************************\n");
-	printf("1. 상품 추가\n2. 상품 목록\n3. 상품 수정\n4. 상품 삭제\n5. 파일 저장\n0. 종료\n");
+	printf("1. 상품 추가\n2. 상품 목록\n3. 상품 수정\n4. 상품 삭제\n5. 파일 저장\n6. 파일 불러오기\n0. 종료\n");
 	printf("*************************\n");
 	scanf("%d", &menu);
 	getchar();
@@ -17,10 +17,27 @@ void save_data(Product * p[], int index){
 	FILE * fp;
 	fp = fopen("product.txt","wt");
 	for(int i =0; i<index; i++){
+		if(p[i]->weight == -1) continue;
 		fprintf(fp,"%d %d %d %d %s\n",p[i]->weight,p[i]->price,p[i]->star,p[i]->star_count,p[i]->name);
 	}
 	fclose(fp);
 	printf("저장됨!!");
+}
+int load_data(Product * p[]){
+	int i = 0;
+	FILE * fp;
+	fp = fopen("product.txt","rt");
+	if(fp==NULL){
+		printf("=> 파일 없음!!\n");
+	}else{
+		while(1){
+			p[i] = (Product *)malloc(sizeof(Product));
+			if(fscanf(fp,"%d %d %d %d %[^\n]s", &p[i]->weight,&p[i]->price,&p[i]->star,&p[i]->star_count,p[i]->name)<5) break;
+			i++;
+		}
+	}
+	fclose(fp);
+	return i;
 }
 
 int main(){
@@ -60,6 +77,10 @@ int main(){
 		}
 		else if(menu == 5) 
 			save_data(p,index);	
+		else if(menu == 6){
+			index = load_data(p);
+			count = index;
+		}
 		else if(menu == 0) break;
 	}
 	return 0;
