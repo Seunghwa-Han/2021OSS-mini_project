@@ -13,48 +13,6 @@ int select_menu(){
 	getchar();
 	return menu;
 }
-void save_data(Product * p[], int index){
-	FILE * fp;
-	fp = fopen("product.txt","wt");
-	for(int i =0; i<index; i++){
-		if(p[i]->weight == -1) continue;
-		fprintf(fp,"%d %d %d %d %s\n",p[i]->weight,p[i]->price,p[i]->star,p[i]->star_count,p[i]->name);
-	}
-	fclose(fp);
-	printf("저장됨!!");
-}
-int load_data(Product * p[]){
-	int i = 0;
-	FILE * fp;
-	fp = fopen("product.txt","rt");
-	if(fp == NULL){
-		printf("=> 파일 없음!!\n");
-		return 0;  //왜 이거 없으면 에러가 나지..??
-	}
-	else{
-		while(1){
-			p[i] = (Product *)malloc(sizeof(Product));
-			if(fscanf(fp,"%d %d %d %d %[^\n]s", &p[i]->weight,&p[i]->price,&p[i]->star,&p[i]->star_count,p[i]->name)<5) break;
-			i++;
-		}
-		printf("=> 로딩성공!!\n");
-	}
-	fclose(fp);
-	return i;
-}
-void search_name(Product * p[], int index, char s_name[]){
-	int check = 0;
-	printf("\nNo Weight  Price  Star  numberOfStar  Name\n");	
-	for(int i = 0; i<index ;i++){
-		if(p[i]->weight==-1) continue;
-		if(strstr(p[i]->name,s_name)){
-			check = 1;
-			printf("%2d ",i+1);
-			read(*p[i]);		
-		}	
-	}	
-	if(check == 0) printf("=> 없습니다..\n");
-}
 
 int main(){
 #ifdef DEBUG
@@ -92,16 +50,16 @@ int main(){
 			}
 		}
 		else if(menu == 5) 
-			save_data(p,index);	
+			saveData(p,index);	
 		else if(menu == 6){
-			index = load_data(p);
+			index = loadData(p);
 			count = index;
 		}
 		else if(menu == 7){
 			char s_name[SIZE];
 			printf("검색할 이름은? ");
 			scanf("%[^\n]s", s_name);
-			search_name(p,index,s_name);
+			searchName(p,index,s_name);
 		}
 		else if(menu == 0) break;
 	}
