@@ -27,14 +27,17 @@ int load_data(Product * p[]){
 	int i = 0;
 	FILE * fp;
 	fp = fopen("product.txt","rt");
-	if(fp==NULL){
+	if(fp == NULL){
 		printf("=> 파일 없음!!\n");
-	}else{
+		return 0;  //왜 이거 없으면 에러가 나지..??
+	}
+	else{
 		while(1){
 			p[i] = (Product *)malloc(sizeof(Product));
 			if(fscanf(fp,"%d %d %d %d %[^\n]s", &p[i]->weight,&p[i]->price,&p[i]->star,&p[i]->star_count,p[i]->name)<5) break;
 			i++;
 		}
+		printf("=> 로딩성공!!\n");
 	}
 	fclose(fp);
 	return i;
