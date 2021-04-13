@@ -7,7 +7,7 @@
 int select_menu(){
 	int menu;
 	printf("\n*************************\n");
-	printf("1. 상품 추가\n2. 상품 목록\n3. 상품 수정\n4. 상품 삭제\n5. 파일 저장\n6. 파일 불러오기\n0. 종료\n");
+	printf("1. 상품 추가\n2. 상품 목록\n3. 상품 수정\n4. 상품 삭제\n5. 파일 저장\n6. 파일 불러오기\n7. 이름으로 검색\n0. 종료\n");
 	printf("*************************\n");
 	scanf("%d", &menu);
 	getchar();
@@ -41,6 +41,11 @@ int load_data(Product * p[]){
 	}
 	fclose(fp);
 	return i;
+}
+void search_name(Product * p[], int index, char s_name[]){
+	for(int i = 0; i<index ;i++){
+	
+	}	
 }
 
 int main(){
@@ -83,6 +88,12 @@ int main(){
 		else if(menu == 6){
 			index = load_data(p);
 			count = index;
+		}
+		else if(menu == 7){
+			char s_name[SIZE];
+			printf("검색할 이름은? ");
+			scanf("%[^\n]s", s_name);
+			search_name(p,index,s_name);
 		}
 		else if(menu == 0) break;
 	}
