@@ -7,7 +7,7 @@
 int select_menu(){
 	int menu;
 	printf("\n*************************\n");
-	printf("1. 상품 추가\n2. 상품 목록\n3. 상품 수정\n4. 상품 삭제\n5. 파일 저장\n6. 파일 불러오기\n7. 이름으로 검색\n8. 가격으로 검색(down)\n0. 종료\n");
+	printf("1. 상품 추가\n2. 상품 목록\n3. 상품 수정\n4. 상품 삭제\n5. 파일 저장\n6. 파일 불러오기\n7. 이름으로 검색\n8. 가격으로 검색(down)\n9. 별점으로 검색\n0. 종료\n");
 	printf("*************************\n");
 	scanf("%d", &menu);
 	getchar();
@@ -66,6 +66,12 @@ int main(){
 			printf("검색할 가격은? ");
 			scanf(" %d", &s_price);
 			searchPriceDown(p,index,s_price);
+		}
+		else if(menu == 9){
+			int s_star;
+			printf("검색할 별점은? ");
+			scanf(" %d", &s_star);
+			searchStar(p,index,s_star);
 		}
 		else if(menu == 0) break;
 	}

@@ -18,5 +18,5 @@ int loadData(Product * p[]); //file에서 데이터 불러오는 함수, 데이�
 
 void searchName(Product * p[], int count, char s_name[]);   //이름을 검색하는 함수 
 void searchPriceDown(Product * p[], int count, int s_price); //가격을 검색하는 함수 (예 : 얼마 미만인 제품)
-void searchStarUp(Product * p[], int count, int s_star);   //별점을 검색하는 함수 (예 : 별점 몇 개 이상인 제품)
+void searchStar(Product * p[], int count, int s_star);   //별점을 검색하는 함수 
 
